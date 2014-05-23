@@ -1,0 +1,27 @@
+Nos últimos três anos, as análises genômicas na área da saúde vêm
+utilizando NGS (Next Generation Sequencing), que produz grandes quantidades 
+de dados de sequenciamento de DNA.
+
+Para realizar o prognóstico de câncer de mama hereditário, câncer de ovários, entre outros, 
+todos os exons dos genes BRCA1 e BRCA2 são sequenciados, gerando cerca de um 1 GB de dados.
+A sequência obtida da paciente deve ser alinhada com uma sequencia de referência.
+Regiões que diferem da sequência de referência devem ser analisadas para saber se as variantes
+são patogênicas ou não.
+
+Este projeto pretende desenvolver um software capaz de automatizar esta rotina, facilitando a 
+elaboração dos laudos. O processo de elaboração do laudo abrange a análise das variantes,
+verificação das variantes conhecidas nos bancos de dados mais renomados (i.e. dbSNP),
+utilização de algoritmos existentes para inferir o comportamento das variantes desconhecidas,
+e possivelmente o desenvolvimento de um algoritmo que pode eliminar alguns artefatos de leitura
+do sequenciamento (falsos positivos e falsos negativos).
+
+Apesar de gerar o laudo automaticamente, esse laudo é apenas uma versão preliminar.
+Tal laudo será revisado por especialistas. O software pode ser usado também
+como um sistema de apoio de decisão, possibilitando que o especialista adicione
+ou remova informações a medida que for necessário.
+
+O aluno foi enviado para o curso de verão 10th Summer Bioinformatics Course, organizado
+pela FMRP-USP e renomado internacionalmente. O curso abordou algumas técnicas para análise
+de variantes utilizando-se a linguagem R. Ao participar do curso, o aluno teve um contato maior
+com a área de genômica, e assim espera-se que possa ter um desempenho melhor nessa área interdisciplinar
+da bioinformática.
