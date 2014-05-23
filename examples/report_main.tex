@@ -1,0 +1,33 @@
+\documentclass[a4paper]{article}
+
+\usepackage{hyperref}
+
+% Packages for brazilian portuguese
+\usepackage[portuguese, brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+% Used for pretty tables and correct margins
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{fullpage}
+\definecolor{rowcolor}{HTML}{F0D6AC}
+\definecolor{header}{HTML}{246896}
+
+% Used for conditionals
+\usepackage{etoolbox}
+\newtoggle{printTable}
+
+% Title text
+\title{Laudo}
+
+\begin{document}
+\maketitle
+Mário
+
+\iftoggle{printTable}{
+	\input{results.tex}
+	\input{table_main.tex}
+}
+
+\input{methodology.tex}
+
+\end{document}

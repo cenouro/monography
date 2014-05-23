@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thin Formal Letter
+% LaTeX Template
+% Version 1.11 (8/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Letters)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{letter}
+
+\usepackage[portuguese, brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+% Adjust margins for aesthetics
+\addtolength{\voffset}{-0.5in}
+\addtolength{\hoffset}{-0.3in}
+\addtolength{\textheight}{2cm}
+
+%\longindentation=0pt % Un-commenting this line will push the closing "Sincerely," to the left of the page
+
+%----------------------------------------------------------------------------------------
+%	YOUR NAME & ADDRESS SECTION
+%----------------------------------------------------------------------------------------
+
+\signature{Mario M. T. B. de Rezende} % Your name for the signature at the bottom
+
+\address{Rua Achille Bassi \\ São Carlos, SP 2717 \\ (16) 98837-3179} % Your address and phone number
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	ADDRESSEE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{letter}{João Alfredo Miranda Botelho \\ QGene Ind. e Com. de equipamentos para Lab. Ltda. \\ Rua Santa Cruz \\ São Carlos, SP 969} % Name/title of the addressee
+
+%----------------------------------------------------------------------------------------
+%	LETTER CONTENT SECTION
+%----------------------------------------------------------------------------------------
+
+\opening{\textbf{Prezado João,}}
+
+Venho por esta informá-lo sobre os acontecimentos de nossa viagem para Brasília.
+
+A platéia era formada por volta de trinta pessoas (médicos e enfermeiros, em sua maioria) e pela \textbf{Cristiane Reis}
+(uma moça do setor de administração, se me lembro bem). Os médicos e enfermeiros pertecentes à platéia trabalhavam
+em cargos com certo grau de burocracia, tais como avaliar se o plano de saúde deveria liberar uma requisição
+de sequenciamento ou se isso deveria ser negado e lidado em posteriores instâncias.
+
+A palestra ministrada pelo Euclides foi bem aceita e acrescentou conhecimento aos espectadores. Eles puderam entender melhor
+sobre o funcionamento, resultados e até mesmo preços e práticas antiéticas que estão sendo exercitadas por outros
+laboratórios. Foi inclusive preparada uma provinha ao final do curso para avaliar a absorção e presença dos espectadores (acho que foi
+o Euclides quem preparou tal provinha).
+
+Ademais, pudemos ter um contato melhor com os problemas que estão sendo enfrentados pela Cassi e outros planos de saúde.
+Tais problemas serão o assunto principal desta carta.
+
+A Cassi é uma entidade que precisa disponibilizar cobertura para exames descritos por duas outras entidades: ANS e Tuss.
+A ANS formulou um Rol que especifica os exames que devem ser cobertos pela Cassi. O Tuss é uma tabela que descreve também
+os procedimentos que devem ser cobertos pela Cassi, com a diferença de que o Tuss também especifica um \textbf{código} para cada
+tipo de procedimento. Esse código, ou identificador, é utilizado pela Cassi para emitir notas fiscais sobre preços, orçamentos,
+entre outras coisas.
+
+Existe outra entidade que especifica procedimentos: a CBHPM. Os procedimentos e códigos disponibilizados pela CBHPM também especificam
+preços dos procedimentos e tal preço é melhor estruturado do que o Tuss (ficará mais claro adiante). Porém, a Cassi não é obrigada a
+responder/utilizar os códigos descritos pela CBHPM.
+
+Com essa visão geral, aqui estão os problemas e preocupações da Cassi:
+\begin{itemize}
+\item As três entidades envolvidas (Tuss, CBHPM e ANS) especificam procedimentos de formas superficiais, divergentes e contraditórias.
+\item Tais contradições/divergências/superficialidades estão gerando \textbf{brechas legais} sobre o que a Cassi deve cobrir ou não, e tais
+brechas estão sendo usadas por alguns pacientes.
+\item Tais brechas são pertinentes ao tipo de exame solicitado, o que significa que são os médicos burocratas, e não advogados, que estão lidando
+com tais situações (pelo menos em primeira e segunda instâncias).
+\item E o maior problema de todos. A Cassi é obrigada a utilizar o código de preços da Tuss, e precisa emitir tal código nas notas. 
+Esse código não é bem especificado e se assemelha muito ao \textbf{escambo}. Aqui, darei um exemplo, pois explicar esse código 
+é impossível uma vez que ele não faz sentido. Imagine que você vai à Guanabara e pede um quibe. O quibe custa cinco reais, porém o código
+de barras do quibe não existe no sistema. A Guanabara te cobra cinco reais e fala \textbf{``Quando você for declarar o imposto de renda, não diga
+que comprou um quibe. Diga que você comprou três pastas de dente e duas agulhas de crochê"}. O Tuss não especifica preço para o sequenciamento
+de BRCA por \textbf{NGS}, apenas para sequenciamento por \textbf{Sanger}, que é um método completamente diferente (exemplo possivelmente irreal). 
+O médico burocrata então deve emitir a nota dizendo que o custo será de \textbf{``10000 x Sequenciamento Sanger"}. 
+Além dessa nota ser ridícula (fato com que os médicos concordam), ela não reflete a realidade do exame realizado.
+\end{itemize}
+
+Além desses problemas, existem outros dois. As normas e especificações usadas pela Cassi estão defasadas. A Tuss foi atualizada, porém a Cassi não
+adotou ainda e não leu o que mudou nas novas versões. Se me lembro bem, estão usando a Tuss 5, e hoje temos já a Tuss 7. O outro problema é que
+será criada uma nova tabela/entidade chamada Tiss, que visa resolver tais problemas. Como isso impactará a Cassi, não temos idéia. Mas vale lembrar que
+tais normas estão, aparentemente, sendo feitas sem que os laboratórios que \textbf{concretizam} as normas sejam consultados, o que pode levar a
+normas mal especificadas e desnecessárias (o que já ocorreu com a internet e o modelo OSI, um estudo de caso interessante). E, eventualmente serão
+quatro entidades metendo o bedelho em tudo quanto é lugar.
+
+No segundo dia, o Euclides mudou a abordagem de minicurso para debate/mesa redonda/\textit{brainstorm} com os participantes. Isso foi muito construtivo pois pudemos
+construir algumas idéias juntamente com os participantes. E ficou claro que, nesse momento, as preocupações não são de caráter financeiro e sim de caráter
+burocrático. 
+ 
+Dessa forma, proponho as seguintes perguntas/tópicos que podem ser interessantes. Note que muitos deles foram discutidos lá, mas como você não estava presente,
+os coloco aqui. E tomei a lberdade de colocar alguns tópicos que surgiram em minha cabeça no momento de redação da carta.
+\begin{itemize}
+\item Sistema para gerir a Cassi.
+\item Diluir burocracia da Cassi através da participação da DNAConsult/QGene/MD Genetics.
+\item Participar na construção de novas normas/códigos em conjunto com ANS e outras entidades.
+\item Formulário para padronizar pedidos de exames.
+\item O mesmo formulário seria usado para transferir um pouco de responsabilidades da Cassi e dos laboratórios para os médicos.
+\item Impacto do formulário benéfico pois o médico deverá \textbf{saber o que está pedindo}.
+\item Consultoria.
+\item Auditoria (outros laboratórios cobrando preços exorbitantes e prestando serviços não condizentes ou de ma qualidade).
+\item Tipos de exames prestados (4800 ou genes específicos).
+\item Redução burocrática através do exame 4800.
+\item Modelo de negócios sobre os 4800 (preço de sequenciamento e, posteriormente, preço de consultas/análises sem sequenciamento).
+\item Logística de coleta de amostras para exames.
+\item Meios/portais para que médicos se atualizem no que diz respeito à genética.
+\item Pacotes de exames.
+\item Sequenciamento pode ser considerado uma \textit{commodity}?
+\item Análise do sequenciamento pode ser visto como \textit{commodity}?
+\item Independência entre nosso TI e TI da Cassi.
+\end{itemize}
+
+\vspace{2\parskip} % Extra whitespace for aesthetics
+\closing{Atenciosamente,}
+\vspace{2\parskip} % Extra whitespace for aesthetics
+
+\ps{P.S. Fica expresso aqui que o conteúdo da carta é informal e muitas coisas foram explicadas superficialmente e/ou
+baseadas em debates verbais. O conteúdo tem o objetivo de fornecer uma visão \textbf{abstrata} sobre os fatos.
+} % Postscript text, comment this line to remove it
+
+%\encl{Copyright permission form} % Enclosures with the letter, comment this line to remove it
+
+%----------------------------------------------------------------------------------------
+
+\end{letter}
+ 
+\end{document}
