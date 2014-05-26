@@ -1,0 +1,62 @@
+Aqui, descrevo mais detalhadamente o processo de sequenciamento do DNA.
+Para entender melhor sobre o sequenciamento, conversei bastante com a equipe
+da empresa e tive a oportunidade de participar do curso de verão \textit{10th Summer Bioinformatics Course}, organizado
+pela FMRP-USP e renomado internacionalmente. O curso abordou algumas técnicas para análise
+de variantes utilizando-se a linguagem R e formas de projetar o experimento a fim de melhorar a qualidade do
+sequenciamento.
+
+%%sequenciamento
+O primeiro passo do experimento é a colheta da amostra do paciente. Após ser colhetada, a amostra
+de DNA é amplificada. Amplificar significa fazer várias cópias do \textbf{trecho de interesse}.
+Isso é feito com o uso de marcadores. Tais marcadores são trechos de DNA que se alinham com o
+início e com o fim das regiões de interesse e, dessa forma, possibilitam que a polimeraze (enzima
+responsável pela replicação do DNA) replique apenas o trecho de interesse. Demais trechos não são amplificados.
+
+Ao término do processo de amplificação, teremos algumas fitas de DNA completas (da amostra original) e vários outros pedaços menores de DNA,
+que são os trechos de interesse. A quantidade dos trechos de interesse é muito maior que o DNA original, o que permite que o sequenciamento
+seja mais preciso. Além disso, antes do sequenciamento, as fitas completas de DNA são removidas através de um crivo (elas possuem peso molecular
+muito maior que os trechos menores).
+
+O equipamento realiza o sequenciamento. É um processo bem complicado, explicado aqui brevemente. O equipamento usa um laser para sequienciar os trechos
+menores de DNA, e tal laser gera imagens. Tais imagens então passam por um algoritmo de processento de imagens para gerar o output. Esse processo é
+repetido várias vezes, o que significa que cada trecho é sequenciado várias vezes (tanto pela repetição do processo, quanto pelo fato
+do trecho ter sido amplificado várias vezes na etapa de amplificação).
+
+Ao fim do processo, temos várias \textit{strings} que representam os diversos sequenciamentos dos trechos. Cada \textit{string} é chamada de \textit{reads}.
+
+%%alinhamento
+Após o sequenciamento, os reads passam por três etapas. Primeiro, eles são alinhados com um DNA de referência. Isso é preciso pois o processo
+de amplificação quebra a ordenação do DNA. Com o alinhamento, é possível recuperar tal estrutura para se analisar os resultados. Note que
+a estrutura não é recuperada por completo. Suponha que temos um indivíduo heterozigoto que apresenta duas mutações em dois exons diferentes do gene
+BRCA1, e suponha que o mesmo gene não apresente mutações no outro cromossomo. Após a amplificação, teríamos um exon normal e um mutante para cada um dos
+dois exons. O sequenciamento detecta os mutantes e os exons normais, porém não é possível reconstruir a estrutura original. As duas mutações poderiam estar
+no mesmo gene ou uma mutação estaria em um dos genes, e a outra, no outro gene. Isso é um exemplo de perda de informação que não é nem um pouco raro.
+
+O segundo passo é podar as sequências dos marcadores. Esse passo aumenta drasticamente a qualidade de leitura das mutações. Muitos reads se alinham na mesma
+região do DNA, porém os reads são projetados para serem intercalados. Por serem intercalados, podemos ter situações onde uma mutação detectada em um read
+coincide com a região de marcador de outro read. O marcador não possui a mutação (pois é projetado com base no DNA referência), logo teremos um read acusando
+mutação e outro read não apresentando mutação. Se eliminarmos as regiões dos marcadores, o read com mutação continua apresentando-a (pois a mutação não se
+encontra na região de marcador do read) e o outro read não apresentaria nada. Ou seja, se não eliminarmos os marcadores, a probabilidade da mutação é de
+cinquenta porcento, e se eliminarmos os marcadores, a mutação tem probabilidade de cem porcento, nesse exemplo. Dessa forma, conseguimos eliminar um falso
+negativo.
+
+O terceiro passo é verificar a cobertura. Os reads perfeitamente alinhados entre si podem ser reads diferentes de um mesmo trecho de DNA, ou reads iguais
+(o processo de sequenciamento não é capaz de diferenciar). Ou seja, podemos ter dois reads alinhados entre si numa mesma região, e que, na verdade, é apenas
+um read contado duas vezes. Para eliminar esse erro, os reads são projetados para terem certo grau de intercalação. Ainda teremos reads alinhados entre si,
+mas também teremos reads intercalados, o que nos garante uma maior qualidade de sequenciamento. Outra forma de amenizar o erro é verificar os reads com
+algumas ferramentas de visualização de DNA. Nas ferramentas, podemos ver os reads. Muitos reads ficam alinhados entre si, mas esses reads podem apresentar
+diferenças pequenas (quen ão caracterizam uma mutação) de nucleotídeos. 
+Dois reads alinhados entre si mas que apresentem divergência de nucleotídeos são necessariamente diferentes. Esses tratamentos aumentam a cobertura,
+que é uma métrica para avaliar a qualidade do sequenciamento da região.
+
+%%variantes
+Após o alinhamento, é gerado um arquivo (um arquivo texto padronizado pela 1000 Genomes) com as variantes. O alinhamento não é feito de forma exata. 
+O alinhamento usa algoritmo de alinhamento de strings que permitem certa flexibilidade. Por exemplo, ``banana" e ``canana" não são strings exatamente 
+iguais, mas ainda é possível alinhar grande parte delas. Fazendo isso, chegaríamos à conclusão de que a letra inicial ('b' ou 'c', dependendo de qual 
+string é a referência) é uma mutação.
+
+O arquivo de mutações agrega outras informações, como qualidade de leitura, código da região, posição da mutação, entre outras coisas. Esse arquivo também
+pode passar por um processo chamado de \textbf{processo de anotação}, onde cada mutação é verificada em bancos de dados renomados e as informações
+contidas nesses bancos de dados são adicionadas ao arquivo de mutações.
+
+Feito isso, o último passo é gerar o laudo.

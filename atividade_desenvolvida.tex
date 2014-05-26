@@ -1,0 +1,18 @@
+﻿Inicialmente, o único projeto era o software para ajudar nas análises das variantes e gerar o laudo. Posteriormente, outro projeto começou a ser desenvolvido
+em paralelo.
+
+Os projetos sendo desenvolvidos são os seguintes:
+
+1: Pipeline para análise de dados de sequenciamento de próxima geração. Os equipamentos de sequenciamento de próxima geração produzem output em 
+um formato padrão que pode ser facilmente passar por um processo de \textit{parsing} por outras ferramentas. O objetivo deste sistema é que ele 
+faça processamentos de tal output com o intuito de melhorar a confiabilidade do sequenciamento (eliminar falsos negativos, especialmente) 
+e melhorar a visibilidade do usuário.
+
+2: Reimplementação de um sistema de controle de teste de paternidade de animais e humanos. O sistema que está sendo utilizado atualmente usa 
+tecnologias defasadas (Firebird como banco de dados, banco de dados local e sem redundância, etc). O objetivo é implementar um sistema semelhante 
+com tecnologias bem sedimentadas (Postgresql, storage da Amazon ou outra cloud, sistema web para facilitar o acesso, entre outras) e migrar 
+os dados posteriormente para o novo sistema.
+
+Os sistemas estão sendo desenvolvidos no framework Ruby on Rails (RoR). 
+
+

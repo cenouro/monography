@@ -1,0 +1,47 @@
+%%rails
+
+Ruby é uma metalinguagem interpretada. Esses dois fatos unidos proporcionam altíssima flexibilidade.
+A sintaxe e outros aspectos da linguagem podem ser alterados para simplificar tarefas ou até mesmo criar um dialeto diferente, porém extremamente
+semelhante à sintaxe original. 
+
+Rails é um framework para Ruby que implementa o modelo MVC para aplicativos web. Em sua maior parte, Rails é exatamente Ruby, mas
+em certas partes (geralmente em arquivos de configurações da aplicação), Rails incrementa a sintaxe da linguagem base. Assim sendo, 
+o framework é altamente poderoso e simples de ser usado.
+
+Rails, como dito antes, implementa o modelo MVC. O código dos controladores e modelos são escritos em RoR (que é particamente Ruby), e as \textit{views}
+são escritos em HTML. Nas views também pode-se usar \textit{embedded Ruby} para geração de páginas dinâmicas ou para simplificar algumas \textit{tags} (
+por exemplo, um botão pode ser criado com o método \textit{button_to}).
+
+Os modelos já implementam funcionalidades de bancos de dados. Isso elimina a necessidade do uso de SQL. Isso não só facilita o uso do framework,
+como também deixa o código mais idiomático como um todo e, além disso, precauções de segurança (por exemplo, contra \textit{SQL injection}) já
+são implementadas pelo framework. Os modelos não só implementam operações básicas de SQL (como \textit{insert} ou \textit{select}), como também implementam
+funcionalidades mais alto nível, como validação do modelo e \textit{joins} com outros modelos. SQL só é necessário para otimizar as operações ou para
+implementar consultas extretamente personalizadas.
+
+%%rspec
+Rspec é uma gema que facilita muito a tarefa de testar o código da aplicação. Em Rspec, pode-se escrever testes para os modelos, controladores e, inclusive,
+para as views. Os testes escritos em Rspec são extremamente concisos e muito próximos do inglês, pois Rspec implementa um dialeto em Ruby para essa finalidade.
+
+No contexto de RoR, os testes são extremamente importantes e não são um aspecto ignorado pelos desenvolvedores. Isso porque RoR é um framework
+que facilita a prototipação da aplicação, e, com uma gema robusta para testes, o processo de refatorar o código, seja para otimizar, organizar, ou 
+transicionar de protótipo para versão final, é muito mais seguro. Rspec também é muito utilizado na fase de desenvolvimento, pois permite e facilita o
+uso da metodologia de desenvolvimento TDD (\textit{Test Driven Development}).
+
+TDD é uma metodologia de desenvolvimento onde testes são escritos antes do desenvolvimento começar. Assim, os testes seriam uma espécie de documento
+de requisitos do sistema. Como a sintaxe do Rspec é semelhante ao inglês, os clientes podem até mesmo participar no desenvolvimento dos casos de teste.
+Dessa forma, o desenvolvedor fica mais seguro de que está desenvolvendo o que o cliente pediu e \textit{gaps} na comunicação entre as partes são reduzidos.
+
+Nos projetos, estou utilizando algumas outras gemas auxiliares que incrementam a funcionalidade do Rspec. A primeira delas chama-se \textit{Shoulda}. Shoulda
+é uma coleção de \textit{matchers} para Rspec. Matchers são métodos que testam algumas funcionalidades e servem para resumir a implementação do
+caso de teste.
+
+A segunda que utilizo frquentemente chama-se \textit{Capybara}. Essa gema possui mathcers para realizar testes de integração. Ela permite simular um usuário
+visitando uma página, preenchendo um formulário, e submetendo o formulário.
+
+Abaixo, seguem alguns exemplos de testes das aplicações que estou desenvolvendo.
+
+%%inserir exemplos
+
+Atualmente, o fluxo de desenvolvimento que estou seguindo na empresa é o seguinte: converso com o cliente e escrevo casos de teste que descrevam o
+aplicativo desejado pelo cliente. Posteriormente, os casos de teste são implementados por mim e por outro estagiário, que estou supervisionando. Dessa forma,
+o desenvolvimento é extremamente organizado.
