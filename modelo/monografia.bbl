@@ -1,0 +1,46 @@
+\begin{thebibliography}{1}
+
+\bibitem{BIOC}
+FMRP.
+\newblock {10th Summer Bioinformatics Course}.
+\newblock \url{http://bioinformatics.fmrp.usp.br/curso2014/}.
+\newblock Acessado: 2014-05-28.
+
+\bibitem{SamTools}
+1000 Genomes.
+\newblock {SAM/BAM and related specifications}.
+\newblock \url{https://github.com/samtools/hts-specs}.
+\newblock Acessado: 2014-05-28.
+
+\bibitem{NGEN}
+Illumina.
+\newblock {Next-Generation Sequencing Technology}.
+\newblock
+  \url{http://www.illumina.com/technology/next-generation-sequencing.ilmn}.
+\newblock Acessado: 2014-05-28.
+
+\bibitem{Capybara}
+Jonas Nicklas.
+\newblock {Capybara GitHub page}.
+\newblock \url{https://github.com/jnicklas/capybara}.
+\newblock Acessado: 2014-05-28.
+
+\bibitem{RoR}
+Ruby on~Rails.
+\newblock {Ruby on Rails GitHub page}.
+\newblock \url{https://github.com/rails/rails/}.
+\newblock Acessado: 2014-05-28.
+
+\bibitem{RSpec}
+RSpec.
+\newblock {RSpec GitHub page}.
+\newblock \url{https://github.com/rspec/rspec-rails/}.
+\newblock Acessado: 2014-05-28.
+
+\bibitem{Shoulda}
+Thoughtbot.
+\newblock {Shoulda GitHub page}.
+\newblock \url{https://github.com/thoughtbot/shoulda/}.
+\newblock Acessado: 2014-05-28.
+
+\end{thebibliography}

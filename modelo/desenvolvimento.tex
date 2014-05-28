@@ -1,0 +1,189 @@
+\chapter{Desenvolvimento do trabalho}
+\label{chap:atividadesRealizadas}
+
+
+\section{Atividades realizadas}
+
+A atividade realizada foi a implementação do pipeline para análise de dados de \gls{ngs} e construção automática de laudo.
+Por ser um sistema complexo e, pela falta de experiência do aluno na área de genética, até o momento foram implementados apenas
+alguns protótipos que estão servindo para melhorar a comunicação com profissionais da área clínica e para ajudar a levantar os requisitos do
+sistema.
+
+A metodologia utilizada para a construção dos protótipos é \gls{tdd}.
+
+%Descreva quais atividades foram realizadas durante o projeto. 
+
+%Para cada atividade realizada, discuta também qual foi a dinâmica de trabalho --- por exemplo, se foi utilizada a metodologia SCRUM ou algo similar.
+
+%Se apropriado, você apresentar algoritmos ou códigos, como o ilustrado na Listagem~\ref{src:code1}, mas deve explicar o seu funcionamento no texto.
+
+%\begin{lstlisting}[
+%  language=C,
+%  caption=Exemplo de código,
+%  label=src:code1
+%]
+%#include <stdio.h>
+%int main(){ 
+%    int i=0, j=1;
+%    printf("i:%d j:%d\n",i,j);
+%    return;
+%}
+%\end{lstlisting}
+%
+%Você também pode fazer uso de figuras (como a Figura~\ref{fig:fig1}), mas deve explicar a figura no texto.
+%
+%\begin{figure}[!ht]
+%  \rule[1ex]{\textwidth}{0.25pt}
+%  \centering\includegraphics[width=0.25\textwidth]{img/logoICMC.png}
+%  \caption [Exemplo de figura]
+%  {Exemplo de figura}\label{fig:fig1}
+%  \rule[1ex]{\textwidth}{0.25pt}
+%\end{figure}
+
+
+\section{Problemas resolvidos}
+
+Os dados gerados pelo \gls{ngs}~\cite{SamTools} precisam ser processados antes de serem analisados.
+Até o presente momento, os protótipos desenvolvidos ajudaram a evidenciar alguns erros que estavam sendo cometidos
+no processamento de tais dados e me permitiram estudar de forma mais concreta tal tecnologia.
+%Descreva quais problemas foram resolvidos. 
+
+
+\section{Técnicas, métodos e tecnologias envolvidas}
+
+Aqui, são apresentados alguns detalhes sobre o desenvolvimento do sistema.
+As ferramentas usadas no desenvolvimento são bem documentadas e apresentam uma abundância de
+exemplos na internet. A descrição detalhada de cada ferramenta está fora do escopo deste trabalho.
+
+
+\subsection{Framework}
+
+O framework usado para a implementação do sistema é \gls{ror}~\cite{RoR}.
+\gls{ror} é um framework poderoso para construção de aplicativos web. \gls{ror} implementa de forma simples e elegante
+o modelo \gls{mvc}.
+
+\gls{ror} foi escolhido por alguns motivos. É um framework com alto poder de prototipação, abstrai totalmente
+a parte de banco de dados (SQL só é necessário para otimizar certas consultas), conta com uma comunidade muito ativa,
+pode ser facilmente configurado para utilizar os serviços de \textit{storage} da Amazon, e é um framework que
+incentiva o programador a escrever casos de teste a fim de ter maior segurança durante a codificação e refatoração do código.
+
+\subsection{RSpec}
+
+RSpec~\cite{RSpec} é uma biblioteca (no contexto de \gls{ror}, também chamadas de \textit{gemas}) projetada para a descrição e implementação de
+\gls{ct}. A sintaxe do RSpec é muito parecida com a sintaxe da linguagem Ruby ao mesmo tempo que se parece muito com a língua inglesa
+(como exemplificado na Listagem~\ref{src:ex1}).
+Isso faz com que os \gls{ct} sejam muito descritivos e concisos, tanto para o desenvolvedor quanto para o cliente, diminuindo a dificuldade
+de comunicação.
+
+É possível escrever \gls{ct} para os modelos, controladores, e até mesmo para as views do sistema. Com a disponibilidade de uma gema
+tão robusta e bem projetada, tornou-se uma convenção a utilização de \gls{tdd} no desenvolvimento de sistemas escritos em \gls{ror}.
+
+\begin{lstlisting}[
+  language=Ruby,
+  caption=Exemplo de RSpec (sem outras gemas),
+  label=src:ex1
+]
+
+describe Pdf do
+	specify "when title is not unique" do
+		pdf.should_not be_a_new_record
+		expect { Pdf.create!(pdf.attributes) }.to raise_error ActiveRecord::RecordInvalid
+	end
+end
+
+\end{lstlisting}
+
+\subsection{Shoulda e Capybara}
+
+Shoulda~\cite{Shoulda} e Capybara~\cite{Capybara} são gemas que incrementam a funcionalidade do RSpec.
+
+Shoulda possui métodos para testar controladores ou modelos com apenas uma linha de código. Por exemplo, existe um método (Listagem~\ref{src:belong_to})
+que verifica se a tabela correspondente
+a um modelo foi criada no banco de dados, se os campos da tabela estão corretos, e se as chaves estrangeiras estão referenciando as tabelas corretas. Essa gema
+não foi utilizada no início do estágio, mas quando foi adotada no projeto, o tamanho dos arquivos de \gls{ct} foi reduzido consideravelmente. Isso foi muito
+importante, pois os protótipos não contam com um documento de requisitos, apenas com os \gls{ct}, e pode-se configurar o Rspec para que ele solte um
+output em formato de documentação. Deixar a implementação dos \gls{ct} concisa reduziu em muito o tamanho da documentação gerada pelo Rspec.
+
+\begin{lstlisting}[
+  language=Ruby,
+  caption=Exemplo de Shoulda,
+  label=src:belong_to
+]
+
+describe Post do
+	it { should belong_to :user }
+end
+
+\end{lstlisting}
+
+Capybara é uma gema com métodos para se realizar testes de integração. Testes de integração são testes que simulam um usuário utilizando o sistema para
+determinadas tarefas. Por exemplo, alguns métodos da gema (Listagem~\ref{src:fill_form}) permitem simular um usuário que visita uma página,
+preenche um formulário, e pressiona o botão de submissão do formulário. Se, após tudo isso, o usuário for redirecionado para a página correta e os dados
+forem salvos no banco de dados, então o aplicativo passa nesse caso de teste.
+
+\begin{lstlisting}[
+  language=Ruby,
+  caption=Exemplo de Capybara,
+  label=src:fill_form
+]
+
+describe "signup" do
+	visit signup_path
+	fill_in "Name", with: "Example User"
+	fill_in "Email", with: "user@example.com"
+	fill_in "Password", with: "foobar"
+	fill_in "Confirmation", with: "foobar"
+	
+	# expectations ...
+end
+
+\end{lstlisting}
+
+\subsection{TDD}
+
+\gls{tdd} é uma metodologia de desenvolvimento onde os \gls{ct} são escritos antes da aplicação ser implementada. Tais casos de teste guiam
+o processo de desenvolvimento. Certos \gls{ct} são escritos consultando-se o cliente, de tal forma que os casos de teste possam ser
+vistos como uma forma de documento de requisitos do sistema. 
+
+Além de guiar o desenvolvedor a implementar exatamente o que o cliente deseja, os casos de teste evitam possíveis \textit{bugs}. Esse aspecto
+é extremamente importante para aplicações em \gls{ror}, pois tal framework é uma extensão da linguagem Ruby, uma linguagem com sintaxe e semântica bastante
+flexissíveis e permissivas. \gls{ror} também conta com algumas outras ferramentas para o funcionamento do sistema, como Javascript, SQL, HTML, e CSS.
+Um sistema escrito em \gls{ror} que não possui casos de teste robustos geralmente é um sistema muito frágil, especialmente quando manutenções forem necessárias.
+Assim, \gls{tdd} é uma metologia que é usada por grande parte da comunidade que utiliza \gls{ror}.
+
+
+%Descreva os métodos, técnicas  e tecnologias
+%envolvidos  ou que  foram utilizados  para a  condução das  atividades
+%durante  o estágio.  Por exemplo:  (i)  no caso  dos métodos,  pode-se
+%apresentar XP (eXtreme Programming) e SCRUM, métodos empregados para o
+%teste de  sistemas, entre  outros; (ii) No  caso de  técnicas, pode-se
+%descrever técnicas da UML, técnicas de teste, entre outros; e (iii) no
+%caso  de  tecnologias,  pode-se descrever  ferramentas  (por  exemplo,
+%Spring, Hibernate,  Struts, entre  outros), linguagens  de programação
+%(por exemplo, Java), padrões de projeto utilizadas, entre outros.
+%
+%Faça  referências bibliográficas  atuais e  de fontes
+%relevantes  (evite  sites,  privilegie   livros  ou  artigos);  mostre
+%diferentes  tecnologias e  faça comparações,  quando for  o caso.  Não
+%esquecer de citar a fonte corretamente, por exemplo~\cite{MichettiJavaMagazine2013}.
+
+\section{Impacto}
+
+Quando o sistema ficar pronto, os profissionais terão em mãos uma ferramente valiosa para ajudá-los a analisar os dados
+do sequenciamento. Usando a ferramenta, espera-se que os prognósticos sejam mais precisos e possam ser usados para
+previnir casos clínicos antes que estes ocorram.
+
+A empresa está firmando acordos com algumas entedidades, porém tais informações são sigilosas.
+
+%Quais foram as pessoas/entidades afetadas por esses resultados? Quem são  as pessoas/entidades que potencialmente serão afetadas?
+
+%Fale sobre a relevância da solução do(s) problema(s) para a empresa e seu(s) cliente(s).
+
+%Você pode omitir informações sigilosas.
+
+%Discuta também sobre a relevância para sua formação a  participação na solução do(s) problema(s).
+
+\section{Problemas não resolvidos}
+
+Não existe versão final do sistema ainda. Apenas protótipos que estão sendo usados para explorar possíveis funcionalidades e outros aspectos do problema.
+%Apresente quais os problemas que não puderam ser resolvidos -- e justifique.
