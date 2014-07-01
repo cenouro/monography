@@ -4,12 +4,52 @@
 
 \section{Atividades realizadas}
 
-A atividade realizada foi a implementação do pipeline para análise de dados de \gls{ngs} e construção automática de laudo.
-Por ser um sistema complexo e, pela falta de experiência do aluno na área de genética, até o momento foram implementados apenas
-alguns protótipos que estão servindo para melhorar a comunicação com profissionais da área clínica e para ajudar a levantar os requisitos do
-sistema.
+Nesta seção são descritas as atividades que realizei durante o estágio. Para as duas atividades de desenvolvimento de software descritas abaixo,
+a dinâmica de trabalho empregada foi a mesma: \gls{tdd}. Essa metodologia foi escolhida pois facilita em muito a comunicação com os solicitantes
+dos softwares e é extremamente útil para projetos cujos requisitos são alterados constantemente.
 
-A metodologia utilizada para a construção dos protótipos é \gls{tdd}.
+\subsection{Software para análise dos genes BRCA1 e BRCA2}
+
+Os genes BRCA1 e BRCA2 são responsáveis, entre outras coisas, pela capacidade da célula de corrigir possíveis erros em
+seu DNA. Por esse motivo, mutações patogênicas em tais genes tem um grande impacto na vida do paciente. Uma célula que
+não consegue se corrigir tem alta probabilidade de gerar células cancerosas ao se reproduzir.
+
+A \gls{ans} emitiu recentemente uma resolução que obriga todos os planos de saúde no Brasil a darem cobertura para
+sequenciamentos de BRCA1 e BRCA2, entre outras doenças. Tais sequenciamentos devem ser solicitados por médicos, e podem ser solicitados
+tanto por medida preventiva como para confirmar diagnósticos.
+
+A atividade planejada é um sistema web com a finalidade de facilitar a requisição de tais exames e emissão de laudo preliminar.
+Dessa forma, o sistema ajudaria e disponibilizaria informações para que o médico escolha o melhor exame pertinente a cada doença (a princípio,
+relacionada ao BRCA1 e BRCA2) e solicite o exame. E, no resultado, teria informações pertinentes para construir e emitir o laudo final.
+
+Outro requisito do sistema é que ele faça o processamento de forma automática dos dados após o sequenciamento. No \gls{ngs}, utilizam-se
+reagentes químicos e enzimáticos para isolar e marcar as áreas do DNA que devem ser sequenciadas. Após o sequenciamento, esses reagentes, se
+não forem eliminados do \textit{output} da máquina de sequenciamento, podem causar ruídos na etapa de análise dos dados. Tais ruídos
+são causados porque alguns dos reagentes são trechos pequenos de DNA que, por construção, são idênticos ao DNA de referência. Se o DNA
+sequenciado apresenta mutações especificamente nas regiões dos reagentes, a máquina acusará que em alguns ciclos do sequenciamento detectou
+tais mutações (no DNA original) e em outros não detectou (no reagente). Isso diminui a confiabilidade do sequenciamento e influencia
+a análise do DNA para a emissão do laudo.
+
+Por fim, ao longo prazo, o sistema deve armazenar os resultados dos sequenciamentos para que a empresa possa minerar dados e possivelmente
+evitar que um mesmo paciente realize o mesmo sequenciamento mais de uma vez (por exemplo, mesmo gene e doenças diferentes). Dados os requisitos 
+de tal sistema, planejei ele em forma de \textit{pipeline} para receber solicitações de exames, fazer o processamento dos dados do 
+sequenciamento e armazenar no banco de dados. O módulo de mineração de dados será um módulo futuro.
+
+\subsection{Programação do robô de pipetação}
+
+Fui solicitado a programar um robô~\cite{Arise} para pipetar reagentes. A empresa vende \textit{kits}, que são misturas de compostos
+químicos e enzimáticos (por exemplo, para realizar testes de paternidade). Os compostos precisam ser pipetados e misturados em volumes precisos.
+Atualmente, a empresa conta com funcionários no laboratório que pipetam manualmente tais \textit{kits}, mas deseja utilizar o robô pois tal tarefa
+é muito repetitiva.
+
+O robô (um braço mecânico) é programado através de um software proprietário de fácil utilização. Basta indicar o tubo de origem, o tubo de destino e a quantitdade
+de cada reagente que deve ser pipetado. A sequência de comandos pode ser salva, podendo ser repetida mais vezes.
+
+\subsection{Reimplementação de sistema legado}
+
+A atividade na qual estou trabalhando atualmente é a reimplementação de um sistema legado. O sistema é responsável por cadastrar clientes e 
+animais e fazer o acompanhamento e marcha analítica dos exames de paternidade. O objetivo da reimplementação é utilizar tecnologias mais robustas para o sistema
+(PostgreSQL, por exemplo), disponibilizar o sistema como um sistema web e utilizar o serviço de \textit{storage} da Amazon.
 
 %Descreva quais atividades foram realizadas durante o projeto. 
 
@@ -42,12 +82,37 @@ A metodologia utilizada para a construção dos protótipos é \gls{tdd}.
 
 
 \section{Problemas resolvidos}
-
-Os dados gerados pelo \gls{ngs}~\cite{SamTools} precisam ser processados antes de serem analisados.
-Até o presente momento, os protótipos desenvolvidos ajudaram a evidenciar alguns erros que estavam sendo cometidos
-no processamento de tais dados e me permitiram estudar de forma mais concreta tal tecnologia.
 %Descreva quais problemas foram resolvidos. 
 
+\subsection{Software para análise dos genes BRCA1 e BRCA2}
+
+Os dados gerados pelo \gls{ngs}~\cite{SamTools} precisam ser processados antes de serem analisados, com a finalidade de aumentar a qualidade
+dos resultados (como descrito na seção anterior).
+Até o presente momento, o sistema ainda está em fase de prototipação. \gls{ngs} é uma forma de sequenciamento
+recente e ainda está sendo estudada pela empresa. Dessa forma, os protótipos desenvolvidos estão ajudando a entender melhor os conceitos, os gráficos
+gerados pela \textit{cloud} do fabricante, e os formatos de arquivos para representar dados de sequenciamento. Esse é um passo muito importante para que
+o laudo emitido pelo médico seja baseado nas informações mais fidedignas possíveis.
+
+Um artifício utilizado pela empresa para avaliar se os protótipos estão produzindo os dados esperados foi a análise de cinco pacientes.
+O conjunto de pacientes que participaram foi formado por uma mãe, que já teve câncer de ováriosi, e suas quatro filhas, que, até então, estão saudáveis;
+contudo, espera-se que venham a ter risco mais elevado de desenvolverem câncer de ovários dado o histórico de sua mãe.
+
+Os protótipos detectaram a mutação na mãe (uma inserção, que muda o quadro de leitura dos aminoácidos e é muito patogênico). Nas filhas, nada foi detectado,
+apesar disso ser um resultado inesperado.
+
+\subsection{Programação do robô de pipetação}
+
+O problema que o robô apresenta é o erro na pipetação. A ponteira de pipeta utilizada pelo robô armazena uma quantidade muito pequena de líquido (cinquenta
+microlitros). Isso gerou a dificuldade de pipetar alguns reagentes que continham substâncias viscosas em sua composição, como o glicerol.
+
+Para eliminar esse problema, o que fiz foi pipetar os solventes antes. Após os solventes estarem no tubo de destino, programei o robô para pipetar os
+reagentes viscosos e, logo em seguida, realizar uma mistura. O comando de mistura faz com que o robô pipete e solte os reagentes do tubo repetidamente.
+Assim, os reagentes que não eram expelidos, apesar de continuarem presos na pipeta, eventualmente eram diluidos o suficientemente para serem expelidos
+sem perda de precisão.
+
+\subsection{Reimplementação de sistema legado}
+
+Essa atividade não apresentou (até então) problemas, uma vez que é apenas uma reimplementação de um sistema ao qual tenho.
 
 \section{Técnicas, métodos e tecnologias envolvidas}
 
@@ -55,17 +120,16 @@ Aqui, são apresentados alguns detalhes sobre o desenvolvimento do sistema.
 As ferramentas usadas no desenvolvimento são bem documentadas e apresentam uma abundância de
 exemplos na internet. A descrição detalhada de cada ferramenta está fora do escopo deste trabalho.
 
+\subsection{\textit{Framework: \gls{ror}}}
 
-\subsection{Framework}
-
-O framework usado para a implementação do sistema é \gls{ror}~\cite{RoR}.
-\gls{ror} é um framework poderoso para construção de aplicativos web. \gls{ror} implementa de forma simples e elegante
+O \textit{framework} usado para a implementação do sistema é \gls{ror}~\cite{RoR}.
+\gls{ror} é um \textit{framework} poderoso para construção de aplicativos web. \gls{ror} implementa de forma simples e elegante
 o modelo \gls{mvc}.
 
-\gls{ror} foi escolhido por alguns motivos. É um framework com alto poder de prototipação, abstrai totalmente
+\gls{ror} foi escolhido por alguns motivos. É um \textit{framework} com alto poder de prototipação, abstrai totalmente
 a parte de banco de dados (SQL só é necessário para otimizar certas consultas), conta com uma comunidade muito ativa,
-pode ser facilmente configurado para utilizar os serviços de \textit{storage} da Amazon, e é um framework que
-incentiva o programador a escrever casos de teste a fim de ter maior segurança durante a codificação e refatoração do código.
+pode ser facilmente configurado para utilizar os serviços de \textit{storage} da Amazon, e é um \textit{framework} que
+incentiva o desenvolvedor a escrever casos de teste a fim de ter maior segurança durante a codificação e refatoração do código.
 
 \subsection{RSpec}
 
@@ -75,12 +139,12 @@ RSpec~\cite{RSpec} é uma biblioteca (no contexto de \gls{ror}, também chamadas
 Isso faz com que os \gls{ct} sejam muito descritivos e concisos, tanto para o desenvolvedor quanto para o cliente, diminuindo a dificuldade
 de comunicação.
 
-É possível escrever \gls{ct} para os modelos, controladores, e até mesmo para as views do sistema. Com a disponibilidade de uma gema
+É possível escrever \gls{ct} para os modelos, controladores, e até mesmo para as \textit{views} do sistema. Com a disponibilidade de uma gema
 tão robusta e bem projetada, tornou-se uma convenção a utilização de \gls{tdd} no desenvolvimento de sistemas escritos em \gls{ror}.
 
 \begin{lstlisting}[
   language=Ruby,
-  caption=Exemplo de RSpec (sem outras gemas),
+  caption=Exemplo ilustrativo da sintaxe do RSpec (sem outras gemas),
   label=src:ex1
 ]
 
@@ -99,10 +163,11 @@ Shoulda~\cite{Shoulda} e Capybara~\cite{Capybara} são gemas que incrementam a f
 
 Shoulda possui métodos para testar controladores ou modelos com apenas uma linha de código. Por exemplo, existe um método (Listagem~\ref{src:belong_to})
 que verifica se a tabela correspondente
-a um modelo foi criada no banco de dados, se os campos da tabela estão corretos, e se as chaves estrangeiras estão referenciando as tabelas corretas. Essa gema
-não foi utilizada no início do estágio, mas quando foi adotada no projeto, o tamanho dos arquivos de \gls{ct} foi reduzido consideravelmente. Isso foi muito
-importante, pois os protótipos não contam com um documento de requisitos, apenas com os \gls{ct}, e pode-se configurar o Rspec para que ele solte um
-output em formato de documentação. Deixar a implementação dos \gls{ct} concisa reduziu em muito o tamanho da documentação gerada pelo Rspec.
+a um modelo foi criada no banco de dados, se os campos da tabela estão corretos, e se as chaves estrangeiras estão referenciando as chaves primárias nas 
+tabelas corretas. Essa gema não foi utilizada no início do estágio, mas quando foi adotada no projeto, o tamanho dos arquivos de \gls{ct} foi reduzido 
+consideravelmente. Isso foi muito importante, pois os protótipos não contam com um documento de requisitos, apenas com os \gls{ct}, e pode-se 
+configurar o Rspec para que ele solte um \textit{output} em formato de documentação. Deixar a implementação dos \gls{ct} concisa reduziu em muito 
+o tamanho da documentação gerada pelo Rspec.
 
 \begin{lstlisting}[
   language=Ruby,
@@ -123,7 +188,7 @@ forem salvos no banco de dados, então o aplicativo passa nesse caso de teste.
 
 \begin{lstlisting}[
   language=Ruby,
-  caption=Exemplo de Capybara,
+  caption=Exemplo de métodos do Capybara,
   label=src:fill_form
 ]
 
@@ -134,23 +199,21 @@ describe "signup" do
 	fill_in "Password", with: "foobar"
 	fill_in "Confirmation", with: "foobar"
 	
-	# expectations ...
+	# expectations in plain Rspec or Shoulda ...
 end
 
 \end{lstlisting}
 
-\subsection{TDD}
+\subsection{\gls{tdd}}
 
 \gls{tdd} é uma metodologia de desenvolvimento onde os \gls{ct} são escritos antes da aplicação ser implementada. Tais casos de teste guiam
-o processo de desenvolvimento. Certos \gls{ct} são escritos consultando-se o cliente, de tal forma que os casos de teste possam ser
-vistos como uma forma de documento de requisitos do sistema. 
+o processo de desenvolvimento. Certos \gls{ct} são escritos consultando-se o cliente para definir o comportamento do sistema, de tal forma que 
+tais casos de teste possam ser vistos como uma forma de documento de requisitos sistema extremamente flexível do sistema. Os demais \gls{ct}
+são escrito para evitar/detectar \gls{bugs} e proporcionar maior segurança e confiança ao desenvolvedor quando manutenções ou alterações forem necessárias.
 
-Além de guiar o desenvolvedor a implementar exatamente o que o cliente deseja, os casos de teste evitam possíveis \textit{bugs}. Esse aspecto
-é extremamente importante para aplicações em \gls{ror}, pois tal framework é uma extensão da linguagem Ruby, uma linguagem com sintaxe e semântica bastante
-flexissíveis e permissivas. \gls{ror} também conta com algumas outras ferramentas para o funcionamento do sistema, como Javascript, SQL, HTML, e CSS.
-Um sistema escrito em \gls{ror} que não possui casos de teste robustos geralmente é um sistema muito frágil, especialmente quando manutenções forem necessárias.
-Assim, \gls{tdd} é uma metologia que é usada por grande parte da comunidade que utiliza \gls{ror}.
-
+O aspecto de evitar/detectar \textit{bugs} é extremamente importante uma vez que \gls{ror} implementa certas medidas de segurança. Detectar e 
+corrigir \textit{bugs} nos modelos são tarefas simples, pois os modelos implementam apenas a lógica de negócio e tabelas do banco de dados. Mas tais tarefas
+podem ser muito complicadas nos controladores, que são responsáveis pelo comportamento do sistema como um todo e também implementam diretivas de segurança.
 
 %Descreva os métodos, técnicas  e tecnologias
 %envolvidos  ou que  foram utilizados  para a  condução das  atividades
@@ -169,11 +232,11 @@ Assim, \gls{tdd} é uma metologia que é usada por grande parte da comunidade qu
 
 \section{Impacto}
 
-Quando o sistema ficar pronto, os profissionais terão em mãos uma ferramente valiosa para ajudá-los a analisar os dados
-do sequenciamento. Usando a ferramenta, espera-se que os prognósticos sejam mais precisos e possam ser usados para
+A respeito do sistema para análise, os profissionais terão em mãos uma ferramente valiosa para ajudá-los a analisar os dados
+do sequenciamento. Utilizando a ferramenta, espera-se que os prognósticos sejam mais precisos e possam ser usados para
 previnir casos clínicos antes que estes ocorram.
 
-A empresa está firmando acordos com algumas entedidades, porém tais informações são sigilosas.
+Sobre as demais atividades, espera-se que os custos operacionais da empresa diminuam e tal redução possa ser repassada para os clientes.
 
 %Quais foram as pessoas/entidades afetadas por esses resultados? Quem são  as pessoas/entidades que potencialmente serão afetadas?
 
