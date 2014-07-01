@@ -1,4 +1,17 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Arise}
+Arise Biotech.
+\newblock {EzMate 401s}.
+\newblock \url{http://www.arisebio.com.tw/product_EzMate_401s.asp}.
+\newblock Acessado: 2014-06-01.
+
+\bibitem{RolANS}
+Agência~Nacional de~Saúde.
+\newblock {ANS amplia cobertura obrigatória para 29 doenças genéticas}.
+\newblock
+  \url{http://www.ans.gov.br/a-ans/sala-de-noticias-ans/consumidor/2316-ans-amplia-cobertura-obrigatoria-para-29-doencas-geneticas-}.
+\newblock Acessado: 2014-06-01.
 
 \bibitem{BIOC}
 FMRP.
@@ -11,6 +24,12 @@ FMRP.
 \newblock {SAM/BAM and related specifications}.
 \newblock \url{https://github.com/samtools/hts-specs}.
 \newblock Acessado: 2014-05-28.
+
+\bibitem{BS}
+Illumina.
+\newblock {BaseSpace Genomics Cloud Computing}.
+\newblock \url{https://basespace.illumina.com/home/index}.
+\newblock Acessado: 2014-06-01.
 
 \bibitem{NGEN}
 Illumina.

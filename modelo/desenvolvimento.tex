@@ -14,7 +14,7 @@ Os genes BRCA1 e BRCA2 são responsáveis, entre outras coisas, pela capacidade 
 seu DNA. Por esse motivo, mutações patogênicas em tais genes tem um grande impacto na vida do paciente. Uma célula que
 não consegue se corrigir tem alta probabilidade de gerar células cancerosas ao se reproduzir.
 
-A \gls{ans} emitiu recentemente uma resolução que obriga todos os planos de saúde no Brasil a darem cobertura para
+A \gls{ans} emitiu recentemente uma resolução~\cite{RolANS} que obriga todos os planos de saúde no Brasil a darem cobertura para
 sequenciamentos de BRCA1 e BRCA2, entre outras doenças. Tais sequenciamentos devem ser solicitados por médicos, e podem ser solicitados
 tanto por medida preventiva como para confirmar diagnósticos.
 
@@ -94,31 +94,63 @@ gerados pela \textit{cloud} do fabricante, e os formatos de arquivos para repres
 o laudo emitido pelo médico seja baseado nas informações mais fidedignas possíveis.
 
 Um artifício utilizado pela empresa para avaliar se os protótipos estão produzindo os dados esperados foi a análise de cinco pacientes.
-O conjunto de pacientes que participaram foi formado por uma mãe, que já teve câncer de ováriosi, e suas quatro filhas, que, até então, estão saudáveis;
+O conjunto de pacientes que participaram foi formado por uma mãe, que já teve câncer de ovários, e suas quatro filhas, que, até então, estão saudáveis;
 contudo, espera-se que venham a ter risco mais elevado de desenvolverem câncer de ovários dado o histórico de sua mãe.
 
-Os protótipos detectaram a mutação na mãe (uma inserção, que muda o quadro de leitura dos aminoácidos e é muito patogênico). Nas filhas, nada foi detectado,
-apesar disso ser um resultado inesperado.
+Os protótipos detectaram a mutação na mãe (uma inserção, que muda o quadro de leitura dos aminoácidos, o que a torna é muito patogênica). Nas filhas, 
+nada foi detectado, apesar disso ser um resultado inesperado.
 
 \subsection{Programação do robô de pipetação}
 
 O problema que o robô apresenta é o erro na pipetação. A ponteira de pipeta utilizada pelo robô armazena uma quantidade muito pequena de líquido (cinquenta
-microlitros). Isso gerou a dificuldade de pipetar alguns reagentes que continham substâncias viscosas em sua composição, como o glicerol.
+microlitros). Isso gerou a dificuldade de pipetar alguns reagentes que continham substâncias viscosas em sua composição, como o glicerol. Líquidos
+viscosos podem formar uma bolha na ponta da pipeta e/ou parte do líquido pode ficar grudada dentro da pipeta.
 
 Para eliminar esse problema, o que fiz foi pipetar os solventes antes. Após os solventes estarem no tubo de destino, programei o robô para pipetar os
 reagentes viscosos e, logo em seguida, realizar uma mistura. O comando de mistura faz com que o robô pipete e solte os reagentes do tubo repetidamente.
-Assim, os reagentes que não eram expelidos, apesar de continuarem presos na pipeta, eventualmente eram diluidos o suficientemente para serem expelidos
+Assim, os reagentes que não eram expelidos, apesar de continuarem presos na pipeta, eventualmente eram diluídos o suficientemente para serem expelidos
 sem perda de precisão.
 
 \subsection{Reimplementação de sistema legado}
 
-Essa atividade não apresentou (até então) problemas, uma vez que é apenas uma reimplementação de um sistema ao qual tenho.
+Essa atividade não apresentou (até então) problemas, uma vez que é apenas uma reimplementação de um sistema ao qual tenho acesso para
+poder realizar engenharia reversa.
 
 \section{Técnicas, métodos e tecnologias envolvidas}
 
 Aqui, são apresentados alguns detalhes sobre o desenvolvimento do sistema.
 As ferramentas usadas no desenvolvimento são bem documentadas e apresentam uma abundância de
 exemplos na internet. A descrição detalhada de cada ferramenta está fora do escopo deste trabalho.
+
+\subsection{\gls{ngs}}
+
+\gls{ngs}~\cite{NGEN} é uma técnica para sequenciamento de DNA feita por leituras que utilizam um \textit{laser} e alguns reagentes que emitem
+diferentes comprimentos de onda de luz. Assim sendo, após um ciclo de leitura, o equipamento tem uma imagem com cores que representam
+os diferentes nucleotídeos do DNA sequenciado, e aplica algoritmos de processamento de imagem para mapear tal imagem em um arquivo
+texto para fácil manipulação.
+
+\gls{ngs} é uma técnica um tanto quanto recente, e pode variar em alguns aspectos dependendo do fabricante do equipamento. O nome \gls{ngs}
+é usado para representar os sequenciamentos que podem fazer leituras de trechos grandes de DNA.
+
+Como toda técnica, essa possui certas desvantagens. O resultado é muito preciso, porém existem técnicas que produzem resultados mais fidedignos
+quando o trecho de DNA sequenciado é pequeno. Além disso, essa técnica, como dito antes, produz resultados viesados pois utiliza-se de reagentes
+que podem introduzir falsos negativos. Por isso, o processo deve ser muito bem acompanhado e os dados produzidos precisam ser tratados após a fase de
+sequenciamento.
+
+\subsection{BaseSpace}
+
+BaseSpace~\cite{BS} é a \textit{cloud} do fabricante do equipamento 
+de \gls{ngs} sendo
+utilizado pela empresa atualmente. Após o término do sequenciamento,
+o equipamento realiza o alinhamento com o DNA de referência e envia os dados
+brutos e dados de alinhamento para a \textit{cloud}. Essa \textit{cloud}
+possui alguns aplicativos web que podem ser utilizados para analisar
+os dados, mas tais análises são um tanto quanto genéricas (por exemplo, 
+não consideram a possibilidade de ruídos devido aos reagentes).
+
+De qualquer forma, a \textit{cloud} ainda é utilizada pois armazena os dados
+e, eventualmente, a empresa cogita a possibilidade de disponibilizar o sistema
+que estou desenvolvendo nessa \textit{cloud} e cobrar um valor módico por análise.
 
 \subsection{\textit{Framework: \gls{ror}}}
 
@@ -157,7 +189,7 @@ end
 
 \end{lstlisting}
 
-\subsection{Shoulda e Capybara}
+\subsubsection{Shoulda e Capybara}
 
 Shoulda~\cite{Shoulda} e Capybara~\cite{Capybara} são gemas que incrementam a funcionalidade do RSpec.
 
@@ -208,12 +240,14 @@ end
 
 \gls{tdd} é uma metodologia de desenvolvimento onde os \gls{ct} são escritos antes da aplicação ser implementada. Tais casos de teste guiam
 o processo de desenvolvimento. Certos \gls{ct} são escritos consultando-se o cliente para definir o comportamento do sistema, de tal forma que 
-tais casos de teste possam ser vistos como uma forma de documento de requisitos sistema extremamente flexível do sistema. Os demais \gls{ct}
-são escrito para evitar/detectar \gls{bugs} e proporcionar maior segurança e confiança ao desenvolvedor quando manutenções ou alterações forem necessárias.
+tais casos de teste possam ser vistos como uma forma de documento de requisitos extremamente flexível do sistema. Os demais \gls{ct}
+são escrito para evitar/detectar \textit{bugs} e proporcionar maior segurança e confiança ao desenvolvedor quando manutenções ou alterações forem necessárias.
 
 O aspecto de evitar/detectar \textit{bugs} é extremamente importante uma vez que \gls{ror} implementa certas medidas de segurança. Detectar e 
 corrigir \textit{bugs} nos modelos são tarefas simples, pois os modelos implementam apenas a lógica de negócio e tabelas do banco de dados. Mas tais tarefas
 podem ser muito complicadas nos controladores, que são responsáveis pelo comportamento do sistema como um todo e também implementam diretivas de segurança.
+Uma diretiva de segurança em particular evita o problema de \textit{mass assignment}, e caso o desenvolvedor não configure tal diretiva, pode acabar com
+dados espúrios no banco de dados. Tal diretiva é silenciosa, ou seja, não emite erros/exceções caso o sistema receba um ataque de \textit{mass assignment}.
 
 %Descreva os métodos, técnicas  e tecnologias
 %envolvidos  ou que  foram utilizados  para a  condução das  atividades
@@ -233,7 +267,7 @@ podem ser muito complicadas nos controladores, que são responsáveis pelo compo
 \section{Impacto}
 
 A respeito do sistema para análise, os profissionais terão em mãos uma ferramente valiosa para ajudá-los a analisar os dados
-do sequenciamento. Utilizando a ferramenta, espera-se que os prognósticos sejam mais precisos e possam ser usados para
+do sequenciamento. Utilizando-se a ferramenta, espera-se que os prognósticos sejam mais precisos e possam ser usados para
 previnir casos clínicos antes que estes ocorram.
 
 Sobre as demais atividades, espera-se que os custos operacionais da empresa diminuam e tal redução possa ser repassada para os clientes.
@@ -248,5 +282,5 @@ Sobre as demais atividades, espera-se que os custos operacionais da empresa dimi
 
 \section{Problemas não resolvidos}
 
-Não existe versão final do sistema ainda. Apenas protótipos que estão sendo usados para explorar possíveis funcionalidades e outros aspectos do problema.
+Não existe versão final do sistema de análise ainda. Apenas protótipos que estão sendo usados para explorar possíveis funcionalidades e outros aspectos do problema.
 %Apresente quais os problemas que não puderam ser resolvidos -- e justifique.

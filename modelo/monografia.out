@@ -7,17 +7,25 @@
 \BOOKMARK [1][-]{section.2.2}{Treinamentos planejados para o est\341gio}{chapter.2}% 7
 \BOOKMARK [0][-]{chapter.3}{Desenvolvimento do trabalho}{}% 8
 \BOOKMARK [1][-]{section.3.1}{Atividades realizadas}{chapter.3}% 9
-\BOOKMARK [1][-]{section.3.2}{Problemas resolvidos}{chapter.3}% 10
-\BOOKMARK [1][-]{section.3.3}{T\351cnicas, m\351todos e tecnologias envolvidas}{chapter.3}% 11
-\BOOKMARK [2][-]{subsection.3.3.1}{Framework}{section.3.3}% 12
-\BOOKMARK [2][-]{subsection.3.3.2}{RSpec}{section.3.3}% 13
-\BOOKMARK [2][-]{subsection.3.3.3}{Shoulda e Capybara}{section.3.3}% 14
-\BOOKMARK [2][-]{subsection.3.3.4}{TDD}{section.3.3}% 15
-\BOOKMARK [1][-]{section.3.4}{Impacto}{chapter.3}% 16
-\BOOKMARK [1][-]{section.3.5}{Problemas n\343o resolvidos}{chapter.3}% 17
-\BOOKMARK [0][-]{chapter.4}{Conclus\343o}{}% 18
-\BOOKMARK [1][-]{section.4.1}{Benef\355cios para o crescimento profissional}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.2}{Considera\347\365es sobre o curso de gradua\347\343o}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.3}{Sugest\365es para o curso de gradua\347\343o}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.4}{Planos para o futuro}{chapter.4}% 22
-\BOOKMARK [0][-]{chapter*.6}{Refer\352ncias}{}% 23
+\BOOKMARK [2][-]{subsection.3.1.1}{Software para an\341lise dos genes BRCA1 e BRCA2}{section.3.1}% 10
+\BOOKMARK [2][-]{subsection.3.1.2}{Programa\347\343o do rob\364 de pipeta\347\343o}{section.3.1}% 11
+\BOOKMARK [2][-]{subsection.3.1.3}{Reimplementa\347\343o de sistema legado}{section.3.1}% 12
+\BOOKMARK [1][-]{section.3.2}{Problemas resolvidos}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.2.1}{Software para an\341lise dos genes BRCA1 e BRCA2}{section.3.2}% 14
+\BOOKMARK [2][-]{subsection.3.2.2}{Programa\347\343o do rob\364 de pipeta\347\343o}{section.3.2}% 15
+\BOOKMARK [2][-]{subsection.3.2.3}{Reimplementa\347\343o de sistema legado}{section.3.2}% 16
+\BOOKMARK [1][-]{section.3.3}{T\351cnicas, m\351todos e tecnologias envolvidas}{chapter.3}% 17
+\BOOKMARK [2][-]{subsection.3.3.1}{ngs}{section.3.3}% 18
+\BOOKMARK [2][-]{subsection.3.3.2}{BaseSpace}{section.3.3}% 19
+\BOOKMARK [2][-]{subsection.3.3.3}{Framework: ror}{section.3.3}% 20
+\BOOKMARK [2][-]{subsection.3.3.4}{RSpec}{section.3.3}% 21
+\BOOKMARK [3][-]{subsubsection.3.3.4.1}{Shoulda e Capybara}{subsection.3.3.4}% 22
+\BOOKMARK [2][-]{subsection.3.3.5}{tdd}{section.3.3}% 23
+\BOOKMARK [1][-]{section.3.4}{Impacto}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.5}{Problemas n\343o resolvidos}{chapter.3}% 25
+\BOOKMARK [0][-]{chapter.4}{Conclus\343o}{}% 26
+\BOOKMARK [1][-]{section.4.1}{Benef\355cios para o crescimento profissional}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.2}{Considera\347\365es sobre o curso de gradua\347\343o}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.3}{Sugest\365es para o curso de gradua\347\343o}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.4}{Planos para o futuro}{chapter.4}% 30
+\BOOKMARK [0][-]{chapter*.6}{Refer\352ncias}{}% 31
