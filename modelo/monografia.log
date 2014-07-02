@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.5.27)  1 JUL 2014 16:23
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.5.27)  1 JUL 2014 21:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1074,25 +1074,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--1
 
  []
 
-) (./desenvolvimento.tex [3
+[3
 
-] [4
-
-]
+]) (./desenvolvimento.tex [4]
 Cap\'{\i }tulo 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 1--1
 
  []
 
-[5]
+[5
+
+]
 Overfull \hbox (7.17102pt too wide) in paragraph at lines 45--47
 []\OT1/ptm/m/n/12 O rob[]o (um bra[]o mec[]anico) []e pro-gra-mado atrav[]es de
  um soft-ware pro-priet[]ario de f[]acil utiliza[][]ao.
  []
 
 [6]
-Overfull \hbox (6.25955pt too wide) in paragraph at lines 116--118
+Overfull \hbox (6.25955pt too wide) in paragraph at lines 117--119
 []\OT1/ptm/m/n/12 Essa ati-vi-dade n[]ao apre-sen-tou (at[]e ent[]ao) pro-ble-m
 as, uma vez que []e ape-nas uma reimplementa[][]ao
  []
@@ -1100,15 +1100,7 @@ as, uma vez que []e ape-nas uma reimplementa[][]ao
 [7]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\gls' on input line 125.
-
-
-LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
-(Font)              using `OT1/cmss/bx/n' instead on input line 155.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\gls' on input line 155.
+(hyperref)                removing `\gls' on input line 126.
 
 [8] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
@@ -1117,21 +1109,21 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 File: lstlang2.sty 2004/09/05 1.3 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 181.
+nput line 187.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 183.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 186.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 192.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 186.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 192.
  [9]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\gls' on input line 239.
+(hyperref)                removing `\gls' on input line 245.
 
 [10]) (./conclusao.tex [11] [12
 
@@ -1168,11 +1160,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 193.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 193.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 193.
 Package rerunfilecheck Info: File `monografia.out' has not changed.
-(rerunfilecheck)             Checksum: CF4F1A6FC134427FCDB83AA27D61872C;2337.
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
+(rerunfilecheck)             Checksum: E61028AF63221665FDBDB547C6A61377;2336.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 193.
  )
 (\end occurred inside a group at level 1)
@@ -1180,17 +1168,20 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 193.
 ### semi simple group (level 1) entered at line 161 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 14815 strings out of 493485
- 213354 string characters out of 3143526
- 405145 words of memory out of 3000000
- 17700 multiletter control sequences out of 15000+200000
+ 14813 strings out of 493485
+ 213321 string characters out of 3143526
+ 405628 words of memory out of 3000000
+ 17698 multiletter control sequences out of 15000+200000
  40496 words of font info for 93 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 43i,15n,74p,1430b,2253s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 43i,15n,74p,1430b,1746s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{glo:ct} has been referenced but doe
 s not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{glo:mvc} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{glo:ror} has been referenced but does not exist, re
 placed by a fixed one
 
 pdfTeX warning (dest): name{glo:ans} has been referenced but does not exist, re
@@ -1200,9 +1191,6 @@ pdfTeX warning (dest): name{glo:fmrp} has been referenced but does not exist, r
 eplaced by a fixed one
 
 pdfTeX warning (dest): name{glo:tdd} has been referenced but does not exist, re
-placed by a fixed one
-
-pdfTeX warning (dest): name{glo:ror} has been referenced but does not exist, re
 placed by a fixed one
 
 pdfTeX warning (dest): name{glo:ngs} has been referenced but does not exist, re
@@ -1219,10 +1207,10 @@ sfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8
 a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on monografia.pdf (30 pages, 215683 bytes).
+Output written on monografia.pdf (30 pages, 218540 bytes).
 PDF statistics:
- 482 PDF objects out of 1000 (max. 8388607)
- 432 compressed objects within 5 object streams
+ 479 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
  104 named destinations out of 1000 (max. 500000)
  254 words of extra memory for PDF output out of 10000 (max. 10000000)
 

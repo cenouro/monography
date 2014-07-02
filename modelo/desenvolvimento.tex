@@ -83,10 +83,11 @@ animais e fazer o acompanhamento e marcha analítica dos exames de paternidade. 
 
 \section{Problemas resolvidos}
 %Descreva quais problemas foram resolvidos. 
+Nesta seção, são descritos problemas enfrentados em cada atividade e que consegui resolver.
 
 \subsection{Software para análise dos genes BRCA1 e BRCA2}
 
-Os dados gerados pelo \gls{ngs}~\cite{SamTools} precisam ser processados antes de serem analisados, com a finalidade de aumentar a qualidade
+Os dados gerados pelo \gls{ngs} (padronizados segundo ~\cite{SamTools}) precisam ser processados antes de serem analisados, com a finalidade de aumentar a qualidade
 dos resultados (como descrito na seção anterior).
 Até o presente momento, o sistema ainda está em fase de prototipação. \gls{ngs} é uma forma de sequenciamento
 recente e ainda está sendo estudada pela empresa. Dessa forma, os protótipos desenvolvidos estão ajudando a entender melhor os conceitos, os gráficos
@@ -152,7 +153,7 @@ De qualquer forma, a \textit{cloud} ainda é utilizada pois armazena os dados
 e, eventualmente, a empresa cogita a possibilidade de disponibilizar o sistema
 que estou desenvolvendo nessa \textit{cloud} e cobrar um valor módico por análise.
 
-\subsection{\textit{Framework: \gls{ror}}}
+\subsection{Ruby on Rails}
 
 O \textit{framework} usado para a implementação do sistema é \gls{ror}~\cite{RoR}.
 \gls{ror} é um \textit{framework} poderoso para construção de aplicativos web. \gls{ror} implementa de forma simples e elegante
@@ -166,8 +167,13 @@ incentiva o desenvolvedor a escrever casos de teste a fim de ter maior seguranç
 \subsection{RSpec}
 
 RSpec~\cite{RSpec} é uma biblioteca (no contexto de \gls{ror}, também chamadas de \textit{gemas}) projetada para a descrição e implementação de
-\gls{ct}. A sintaxe do RSpec é muito parecida com a sintaxe da linguagem Ruby ao mesmo tempo que se parece muito com a língua inglesa
-(como exemplificado na Listagem~\ref{src:ex1}).
+\gls{ct}. A sintaxe do RSpec é muito parecida com a sintaxe da linguagem Ruby ao mesmo tempo que se parece muito com a língua inglesa,
+como exemplificado na Listagem~\ref{src:ex1}. Tal listagem exemplifica também a estrutura básica dos casos de teste: \textbf{describe}, que
+define o sujeito do caso de teste (no caso, um objeto da classe \textbf{Pdf}), \textbf{specify}, que é um caso de teste, e, dentro do caso de teste,
+as expectativas (\textbf{should\_not} e \textbf{expect}), que, em conjunto com os \textit{matchers} (\textbf{be\_a\_new\_record}, \textbf{raise\_error}),
+verificam o comportamento do sistema. Em outras palavras, a listagem exibe um caso de teste que testa um \textbf{pdf} que possui título. Tal
+\textbf{pdf} deve estar salvo no banco de dados e, quando tentarmos inserí-lo novamente no banco de dados, o sistema deve levantar uma exceção
+indicando que o título do \textbf{pdf} já está sendo utilizado por outra tupla.
 Isso faz com que os \gls{ct} sejam muito descritivos e concisos, tanto para o desenvolvedor quanto para o cliente, diminuindo a dificuldade
 de comunicação.
 
@@ -244,7 +250,7 @@ tais casos de teste possam ser vistos como uma forma de documento de requisitos 
 são escrito para evitar/detectar \textit{bugs} e proporcionar maior segurança e confiança ao desenvolvedor quando manutenções ou alterações forem necessárias.
 
 O aspecto de evitar/detectar \textit{bugs} é extremamente importante uma vez que \gls{ror} implementa certas medidas de segurança. Detectar e 
-corrigir \textit{bugs} nos modelos são tarefas simples, pois os modelos implementam apenas a lógica de negócio e tabelas do banco de dados. Mas tais tarefas
+corrigir \textit{bugs} nos modelos são tarefas simples, pois os modelos implementam apenas as lógicas de negócios e tabelas do banco de dados. Mas tais tarefas
 podem ser muito complicadas nos controladores, que são responsáveis pelo comportamento do sistema como um todo e também implementam diretivas de segurança.
 Uma diretiva de segurança em particular evita o problema de \textit{mass assignment}, e caso o desenvolvedor não configure tal diretiva, pode acabar com
 dados espúrios no banco de dados. Tal diretiva é silenciosa, ou seja, não emite erros/exceções caso o sistema receba um ataque de \textit{mass assignment}.
@@ -283,4 +289,9 @@ Sobre as demais atividades, espera-se que os custos operacionais da empresa dimi
 \section{Problemas não resolvidos}
 
 Não existe versão final do sistema de análise ainda. Apenas protótipos que estão sendo usados para explorar possíveis funcionalidades e outros aspectos do problema.
+
+Sobre o robô, apesar de resolver o problema de reagentes viscosos, ainda estamos verificando se é viável sua utilização, uma vez que
+existe uma variância na quantidade de reagentes pipetados devido aos erros de medições do equipamento. Esse erro é especificado em seu manual,
+mas a empresa não sabe ainda se tal erro pode ser tolerado nas reações, já que as reações devem ser muito precisas. Como exemplo, a concentração de enzimas
+nas reações deve ser da ordem de picomols; concentrações mais grosseiras ou finas podem influenciar na cinética enzimática, proporcionando erros nas reações.
 %Apresente quais os problemas que não puderam ser resolvidos -- e justifique.
