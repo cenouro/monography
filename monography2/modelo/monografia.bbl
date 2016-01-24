@@ -1,0 +1,80 @@
+\begin{thebibliography}{10}
+
+\bibitem{Coplien}
+James~O. Coplien.
+\newblock {Why most unit testing is a waste of time}.
+\newblock
+  \url{http://www.rbcs-us.com/documents/Why-Most-Unit-Testing-is-Waste.pdf}.
+\newblock Acessado: 2015-11-09.
+
+\bibitem{Legacy}
+Michael Feathers.
+\newblock {\em Working Effectively with Legacy Code}.
+\newblock Prentice Hall, 2004.
+
+\bibitem{NoSQL}
+Martin Fowler and Pramod~J. Sadalage.
+\newblock {\em NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot
+  Persistence}.
+\newblock Addison-Wesley Professional, 2012.
+
+\bibitem{Git}
+Git.
+\newblock {Git}.
+\newblock \url{https://git-scm.com/}.
+\newblock Acessado: 2015-11-08.
+
+\bibitem{AWQL}
+Google.
+\newblock {AdWords Query Language}.
+\newblock \url{https://developers.google.com/adwords/api/docs/guides/awql}.
+\newblock Acessado: 2015-11-08.
+
+\bibitem{AdWords}
+Google.
+\newblock {Google AdWords API}.
+\newblock \url{https://developers.google.com/adwords/api/}.
+\newblock Acessado: 2015-11-08.
+
+\bibitem{Googleads}
+Google.
+\newblock {googleads-python-lib}.
+\newblock \url{https://github.com/googleads/googleads-python-lib}.
+\newblock Acessado: 2015-11-08.
+
+\bibitem{Mongo}
+MongoDB Inc.
+\newblock {MongoDB}.
+\newblock \url{https://www.mongodb.org/}.
+\newblock Acessado: 2015-11-08.
+
+\bibitem{Pymongo}
+MongoDB Inc.
+\newblock {PyMongo}.
+\newblock \url{https://api.mongodb.org/python/current/}.
+\newblock Acessado: 2015-11-08.
+
+\bibitem{Stack}
+Stack~Exchange Inc.
+\newblock {StackOverflow}.
+\newblock \url{http://stackoverflow.com/}.
+\newblock Acessado: 2015-11-08.
+
+\bibitem{Raccoon}
+Raccoon Marketing~Digital LTDA.
+\newblock {Raccoon Marketing Digital}.
+\newblock \url{http://raccoon.ag/}.
+\newblock Acessado: 2015-11-08.
+
+\bibitem{CleanCode}
+Robert~C. Martin.
+\newblock {\em Clean Code: A Handbook of Agile Software Craftsmanship}.
+\newblock Prentice Hall, 2008.
+
+\bibitem{Mongoengine}
+MongoEngine.
+\newblock {MongoEngine}.
+\newblock \url{http://mongoengine.org/}.
+\newblock Acessado: 2015-11-08.
+
+\end{thebibliography}

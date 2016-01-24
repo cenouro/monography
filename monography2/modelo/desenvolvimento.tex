@@ -1,0 +1,278 @@
+\chapter{Desenvolvimento do Trabalho}
+\label{chap:atividadesRealizadas}
+
+% Este capítulo deve ter de 4 a 10 páginas.
+
+\section{Atividades Realizadas}
+
+\subsection{NapPy}
+
+O desenvolvimento inicial do NapPy foi realizado por mim e um
+colega de trabalho. Como não tínhamos familiaridade com a API do
+Google AdWords e nem com MongoDB, optamos por realizar o
+desenvolvimento em \emph{pair programming}. Também seguimos a
+convenção da empresa, adotando as metodologias SCRUM e
+\gls{tdd}.
+
+\subsection{Refatoração do NapPy}
+
+Eventualmente, meu colega decidiu sair do estágio por motivos
+pessoais. Assim sendo, solicitei que um sprint fosse alocado para
+que eu pudesse realizar benchmarks e me familiarizar com partes
+da code base que foram implementadas principalmente por meu
+colega pois eu continuaria como único desenvolvedor do software.
+
+Os resultados do benchmark deixaram muito a desejar. NapPy, basicamente, 
+realizava três requisições por campanha para os servidores do Google. Tais
+requisições eram o gargalo do sistema e, para enviar múltiplas
+campanhas, NapPy realizaria um número enorme de requisições.
+
+Com tais resultados, solicitei que mais dois sprints fossem
+alocados para que o código fosse refatorado. A refatoração que
+planejei tinha por objetivo melhorar o desempenho do sistema e
+utilizar o serviço de labels da API do Google para simplificar a
+lógica de negócios do software.
+
+\subsubsection{Otimização}
+
+Como mencionado anteriormente, o gargalo do software era o
+número de requisições enviadas para o Google. NapPy realizava
+três requisições por campanha. A primeira requisição lidava com
+o serviço de campanhas da API; a segunda, com o serviço de grupos
+de anúncios; e a terceira, com o serviço de anúncios.
+
+Tais requisições precisavam ser realizadas por campanha pois esta
+era a forma como o banco de dados foi modelado. A modelagem foi
+feita visando utilizar \emph{embedded documents}, uma das formas
+de armazenar dados em MongoDB.
+
+Para otimizar o desempenho, o banco foi remodelado. A nova
+modelagem (ainda em MongoDB) contém três tabelas. Uma tabela
+armazena campanhas; a segunda, armazena grupos de anúncios e o
+\emph{id} da campanha à qual o grupo de anúncio pertence; a
+terceira, armazena anúncios, o \emph{id} da campanha e o
+\emph{id} do grupo de anúncio aos quais o anúncio pertence.
+Essas três tabelas são muito mais próximas da estrutura de árvore
+utilizada pelo Google para representar campanhas e anúncios do
+que a modelagem que utilizava documentos aninhados.
+
+Com a nova modelagem, ficou trivial otimizar o software.
+Primeiro, uma requisição era enviada com uma lista de
+campanhas. Depois, uma segunda requisição contendo todos os
+grupos de anúncio pertencentes às campanhas enviadas
+anteriormente. Por fim, uma terceira requisição enviava a lista
+de anúncios pertinentes às entidades enviadas anteriormente. Três
+requisições seriam capazes de realizar toda a lógica de negócio.
+Na prática, porém, o número de requisições pode ser maior. A API
+do Google impõem certas limitações. Dessa forma, NapPy realiza
+requisições com, no máximo, 5000 operações.
+
+Mesmo com a simplicidade da nova lógica de percorrer a estrutura
+de campanhas, a code base do sistema já tinha um tamanho
+considerável. Para evitar problemas durante a refatoração, segui
+técnicas descritas em \cite{Legacy}. Dessa forma, o sistema
+continuava funcionando, e a refatoração poderia ser comparada com
+a antiga implementação para validação de resultados.
+
+Após a refatoração, executei os benchmarks novamente. A versão
+anterior do NapPy demorava 2 minutos para criar uma campanha. A
+nova versão é capaz de criar 20000 campanhas em 20 minutos.
+
+A refatoração é considerada um sucesso. Não somente melhorou o
+desempenho do software como também simplificou em muito a rotina
+ que percorre a estrutura de árvore das campanhas. Isso, por
+sua vez, permitiu que sub-rotinas de tratamento de erros fossem
+implementadas de forma concisa.
+
+\subsubsection{Utilização do serviço de labels}
+
+A API do Google Adwords contém um serviço específico para
+lidar com labels. Labels podem ser adicionadas ou removidas às
+entidades nos servidores do Google e
+utilizadas para a realização de queries em outras tabelas.
+
+Após a execução do NapPy, toda a estrutura de campanhas e
+anúncios estaria concretizada nos servidores do Google, e os
+usuários poderiam proceder normalmente com as otimizações de
+campanhas e anúncios. Porém, os usuários utilizam uma ferramenta
+do Google para isso. Dessa forma, NapPy teria a responsabilidade
+extra de manter a coerência entre os dados no Google e dados em
+MongoDB.
+
+Tal lógica de coerência seria extremamente complexa para
+implementar. Para lidar com tal problema, cogitava-se a
+implementação de uma interface gráfica para ser utilizada ao
+invés da ferramenta do Google.
+
+Conjuntamente com a remodelagem do banco de dados, propus que 
+labels fossem utilizadas para lidar com a coerência de dados. A
+ideia seria que o usuário continuasse utilizando a ferramenta do
+Google, mas que adicionasse labels pré-definidas para certas
+operações quando cabível. Por exemplo, se o usuário desejasse que
+um anúncio parasse de ser atualizado através das rotinas do
+NapPy, bastaria adicionar uma label específica ao anúncio. Labels não
+resolveriam completamente o problema, mas simplificariam em muito
+o código necessário para cobrir todos os casos de uso.
+Essa feature não foi implementada até o presente momento.
+
+% Descreva quais atividades foram realizadas durante o projeto. 
+
+% Para cada atividade realizada, discuta também qual foi a dinâmica de trabalho --- por exemplo, se foi utilizada a metodologia SCRUM ou algo similar.
+
+% Se apropriado, você apresentar algoritmos ou códigos, como o ilustrado na Listagem~\ref{src:code1}, mas deve explicar o seu funcionamento no texto.
+
+% \begin{lstlisting}[
+%   language=C,
+%   caption=Exemplo de código,
+%   label=src:code1
+% ]
+% #include <stdio.h>
+% int main(){ 
+%     int i=0, j=1;
+%     printf("i:%d j:%d\n",i,j);
+%     return;
+% }
+% \end{lstlisting}
+
+% Você também pode fazer uso de figuras (como a Figura~\ref{fig:fig1}), mas deve explicar a figura no texto.
+
+% \begin{figure}[!ht]
+%   \rule[1ex]{\textwidth}{0.25pt}
+%   \centering\includegraphics[width=0.25\textwidth]{img/logoICMC.png}
+%   \caption [Exemplo de figura]
+%   {Exemplo de figura}\label{fig:fig1}
+%   \rule[1ex]{\textwidth}{0.25pt}
+% \end{figure}
+
+
+\section{Problemas resolvidos}
+
+Ao término do estágio, o sistema NapPy se encontrava em estágio
+avançado de desenvolvimento e os requisitos de tempo de execução
+foram atingidos.
+
+% Descreva quais problemas foram resolvidos. 
+
+
+\section{Técnicas, métodos e tecnologias envolvidas}
+
+\subsection{MongoDB}
+
+MongoDB\cite{Mongo} é um banco de dados \emph{NoSQL}, baseada em \emph{documentos}. 
+A definição de tais termos foge do escopo desse trabalho, e pode
+ser encontrada em \cite{NoSQL}.
+
+MongoDB utiliza objetos JSON para representar documentos, que podem ser
+facilmente manipulados em Python. Queries também são descritas
+como objetos JSON.
+
+MongoDB foi escolhido por sua simples utilização e pela
+possibilidade de ser escalado horizontalmente.
+
+\subsection{Python}
+
+NapPy foi implementado na linguagem Python, versão 3.
+
+\subsubsection{PyMongo}
+
+PyMongo\cite{Pymongo} é o driver nativo de MongoDB para Python. A biblioteca é
+simples de ser utilizada. Queries em Mongo são objetos JSON, e
+dicionários em Python podem facilmente ser convertidos para
+objetos JSON. O mesmo vale para documentos resultantes de
+queries.
+
+\subsubsection{MongoEngine}
+
+MongoEngine\cite{Mongoengine} é uma ORM para MongoDB e Python. MongoEngine foi
+projetada para ser similar a outras ORMs 
+utilizadas em Django, um framework em Python para sistemas
+\gls{mvc}.
+
+MongoEngine é um tanto quanto mais abstrata do que PyMongo, até
+mesmo em como descrever queries. A biblioteca foi utilizada para
+implementar os modelos (inclusive os índices) utilizados pelo NapPy;
+mas PyMongo foi utilizada para implementar queries já que a
+abstração extra de MongoEngine seria desnecessária (podendo até
+mesmo tornar o código menos legível).
+
+\subsubsection{googleads-python-lib}
+
+googleads-python-lib\cite{Googleads} é a biblioteca cliente para Python. O
+repositório da biblioteca contem a implementação de diversos
+exemplos, inclusive como gerar credenciais de OAUTH 2.0 para se
+acessar a API do Google.
+
+\subsection{Google AdWords API}
+
+A API do Google AdWords\cite{AdWords} permite que dados do serviço de AdWords
+sejam acessados de forma programática. A API é composta por
+diferentes serviços, e.g. AdGroupAdService é o serviço utilizado
+para lidar com anúncios. 
+
+A API também disponibiliza a \gls{awql}\cite{AWQL}, 
+para queries complexas. Queries simples não precisam
+utilizar AWQL; bibliotecas clientes possuem classes que
+implementam o \emph{Query Object design pattern}.
+
+A API impõem certas limitações em sua utilização. Existem limites
+nos números de requisições por minuto, no número de requisições
+realizadas concorrentemente e no número de operações por
+requisição. \gls{awql} não implementa JOIN e nem GROUP BY.
+
+\subsection{Test Driven Development}
+
+O desenvolvimento foi realizado utilizando-se
+\gls{tdd}. Tal prática consiste em escrever
+testes para o sistema antes que o código em si seja escrito.
+Dependendo de como os testes são escritos, eles podem até mesmo
+servir como documentação do sistema.
+
+A fase inicial do projeto contou com uma pletora de testes de
+unidade. Tais testes visam especificar o comportamento de
+componentes do sistema de forma isolada. Como testes de unidade
+podem ter grande impacto na
+produtividade\cite{Coplien}, optei por deixá-los
+sob versionamento por referência, dando apenas continuidade na
+escrita de testes de integração.
+
+% Descreva os métodos, técnicas  e tecnologias
+% envolvidos  ou que  foram utilizados  para a  condução das  atividades
+% durante  o estágio.  Por exemplo:  (i)  no caso  dos métodos,  pode-se
+% apresentar XP (eXtreme Programming) e SCRUM, métodos empregados para o
+% teste de  sistemas, entre  outros; (ii) No  caso de  técnicas, pode-se
+% descrever técnicas da UML, técnicas de teste, entre outros; e (iii) no
+% caso  de  tecnologias,  pode-se descrever  ferramentas  (por  exemplo,
+% Spring, Hibernate,  Struts, entre  outros), linguagens  de programação
+% (por exemplo, Java), padrões de projeto utilizadas, entre outros.
+
+% Faça  referências bibliográficas  atuais e  de fontes
+% relevantes  (evite  sites,  privilegie   livros  ou  artigos);  mostre
+% diferentes  tecnologias e  faça comparações,  quando for  o caso.  Não
+% esquecer de citar a fonte corretamente, por exemplo~\cite{MichettiJavaMagazine2013}.
+
+\section{Impacto}
+
+Eventualmente, o desenvolvimento do NapPy foi cancelado. O
+projeto não possuía escopo bem definido e outros projetos com
+maior prioridade surgiram. Ainda assim, a code base ainda é
+utilizada como referência por ser escrita de forma bem
+estruturada e conter trechos de código que podem facilmente serem
+reutilizados (especialmente rotinas de benchmark).
+
+O desenvolvimento do sistema também serviu para evidenciar certas
+falhas no processo de desenvolvimento de softwares da empresa
+como um todo.
+
+% Quais foram as pessoas/entidades afetadas por esses resultados? Quem são  as pessoas/entidades que potencialmente serão afetadas?  
+
+% Fale sobre a relevância da solução do(s) problema(s) para a empresa e seu(s) cliente(s).
+
+% Você pode omitir informações sigilosas.
+
+% Discuta também sobre a relevância para sua formação a  participação na solução do(s) problema(s).
+
+\section{Problemas não resolvidos}
+
+A feature que utiliza labels não foi implementada. O código que
+lidava com palavras-chave também não foi refatorado e incluído na
+versão refatorada pois o desenvolvimento já havia sido cancelado. 

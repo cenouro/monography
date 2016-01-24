@@ -1,0 +1,192 @@
+\documentclass[12pt,times,a4paper,twoside]{icmc}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[top=30mm,bottom=20mm,left=30mm,right=20mm,twoside]{geometry}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[nottoc]{tocbibind}
+\usepackage{fancychap} % Remova se quiser tirar os detalhes do título do capítulo
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathptmx} % Necessário para corrigir a fonte para Times
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{algpseudocode}
+\usepackage{pdfpages}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{natbib}
+\lstset{numbers=left, %%% Para insercao de codigos e listagens
+stepnumber=1,
+firstnumber=1,
+numberstyle=\tiny,
+belowskip= 0.5cm,
+numbersep= 0.2cm,
+extendedchars=true,
+breaklines=true,
+frame=tb,
+basicstyle=\footnotesize,
+stringstyle=\ttfamily,
+showstringspaces=false
+}
+
+%\usepackage{parskip}
+\usepackage{longtable}
+\usepackage[toc]{glossaries}
+%\makeglossaries
+
+\hypersetup{
+    colorlinks = true,
+    citecolor = black,
+    filecolor = black,
+    linkcolor = black,
+    urlcolor = black,
+}
+
+\usepackage[toc]{glossaries}
+%\makeglossaries
+
+\newcommand{\tituloMonografia}{Software automatizador de
+estruturação de campanhas no Google AdWords}
+
+\newcommand{\nomeAluno}{Mario M. T. B. de Rezende}
+
+\newcommand{\nomeSupervisor}{Rui G. Calsaverini}
+
+\newcommand{\nomeEmpresa}{Raccoon Agência de Marketing Digital
+LTDA.}
+
+\renewcommand*{\lstlistlistingname}{Lista de Listagens}
+
+\hyphenation{}
+
+% abbreviations: coloque em ordem alfabética
+\newacronym{awql}{AWQL}{\emph{AdWords Query Language}}
+\newacronym{bcc}{BCC}{Bacharelado em Ciências da Computação}
+\newacronym{cep}{CEP}{Código de Endereçamento Postal}
+\newacronym{icmc}{ICMC}{Instituto de Ciências Matemáticas e de Computação}
+\newacronym{mvc}{MVC}{\emph{Model View Controller}}
+\newacronym{roi}{ROI}{\emph{Return Over Investiment}}
+\newacronym{sp}{SP}{São Paulo}
+\newacronym{tdd}{TDD}{\emph{Test Driven Development}}
+\newacronym{usp}{USP}{Universidade de São Paulo}
+
+
+\begin{document}
+\pagenumbering{roman}
+
+\begin{titlepage}   
+	\pagestyle{empty} % no headers in this environment
+
+  	% title page
+	\begin{center} 
+    \begin{minipage}[c]{12cm}
+    \begin{center}
+      \vspace{.35\textheight}
+      \hrulefill\\
+      \vspace{.5cm} {\Large \textcolor{blue}{\tituloMonografia}}\\
+      \vspace{1.3cm}
+      \textbf{\nomeAluno}\\
+      \vspace{.5cm}
+      \hrulefill\\
+    \vspace{5cm}
+    \includegraphics[width=5cm]{img/logoICMC.png}
+    \end{center}
+    \end{minipage}
+  \end{center} 
+  
+
+  \cleardoublepage
+ 
+
+  \vspace*{3cm}
+  \begin{center}
+    {\huge\sf \textcolor{blue}{\tituloMonografia}} \\
+    \vspace*{2cm}
+    {\bf \nomeAluno} \\
+    \vspace*{2cm}
+    \emph{Supervisor:}  {\nomeSupervisor}\\
+    \emph{Empresa:}  {\nomeEmpresa}
+  \end{center}
+  \vspace*{3cm}
+
+  \begin{flushright}
+    \begin{minipage}{10cm}
+      Monografia de conclusão de curso apresentada ao
+Instituto de Ciências Matemáticas e de Computação da Universidade de São Paulo para obtenção do título de Bacharel em
+Ciências de Computação.
+    \end{minipage}
+  \end{flushright}
+
+  \vspace*{2cm}
+  \begin{center}
+    \textbf{USP - São Carlos \\ Novembro de 2015}
+  \end{center}
+  
+  \cleardoublepage  
+  
+\end{titlepage}
+
+\thispagestyle{plain}  
+\setcounter{page}{1}
+
+% \chapter*{Dedicatória}
+
+% Dedico..... 
+
+% \chapter*{Agradecimentos}
+
+% Agradeço..... 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input resumo.tex
+
+\noindent \textbf{Palavras-chaves:} NoSQL, AdWords API, TDD
+
+\tableofcontents
+% \listoffigures
+% \listoftables
+% \lstlistoflistings
+\printglossary[title=Lista de Termos,toctitle=Termos e Abreviaturas]
+
+\onehalfspacing
+
+\mainmatter
+
+\renewcommand{\chaptermark}[1]{%
+
+\markboth{\chaptername
+\ \thechapter.\ #1}{}}  %
+
+\renewcommand{\sectionmark}[1]{%
+ \markright{\thesection.\ #1}}
+
+%\input ...
+\input introducao.tex
+\input planejamento.tex
+\input desenvolvimento.tex
+\input conclusao.tex
+
+%Observação 1: É obrigatório que a monografia tenha uma lista de referências que deve estar contida neste item.
+%Observação 2: As referências devem estar em ordem alfabética pelo sobrenome do primeiro autor.
+%Observação 3: Todos os documentos referenciados nesse item (livros, artigos, relatórios técnicos, sites, entre outros) deverão ter sido citados no texto.
+%Observação 4: Todos as citações no decorrer do texto deverão ser listadas neste item.
+%Observação 5: É obrigatório que a lista de referências esteja de acordo com a norma NBR-6023/2002 para referências bibliográficas.
+
+\renewcommand{\bibname}{Referências}
+%\printbibliography[heading=bibintoc]
+\bibliographystyle{plain} 
+\bibliography{referencias}
+
+% Se precisar de apêndice, use a seção abaixo
+%\appendix
+%\renewcommand\appendixname{Apêndice}
+%\renewcommand\chaptername{Apêndice}
+
+\end{document}
